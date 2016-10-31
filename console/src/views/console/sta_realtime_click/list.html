@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <% include ../include/head.html %>
+</head>
+<body>
+<% include ../include/navbar.html %>
+<div id="main">
+  <% include ../include/sidebar.html %>
+  <div id="content">
+    <div class="panel">
+      <div class="header">
+        <ul class="breadcrumb">
+          <li><a href="/console">主页</a><span class="divider">/</span></li>
+          <li>实时统计<span class="divider">/</span></li>
+          <li class="active">点击统计</li>
+
+          <li class="dropdown pull-right">
+            <span><%= date + ' ' + time %> </span>
+          </li>
+        </ul>
+      </div>
+      <div class="inner">
+        <table class="table table-bordered">
+          <tr>
+            <th>广告</th>
+            <th>自动点击次数</th>
+            <th>自动点击IP数</th>
+            <th>用户点击次数</th>
+            <th>用户点击IP数</th>
+          </tr>
+          <% for(var i = 0; i < items.length; i++){ %>
+          <tr>
+            <td><span><%= items[i].ad_name %></span></td>
+            <td><span><%= items[i].auto_click_count %></span></td>
+            <td><span><%= items[i].auto_click_ip_count %></span></td>
+            <td><span><%= items[i].user_click_count %></span></td>
+            <td><span><%= items[i].user_click_ip_count %></span></td>
+          </tr>
+          <% } %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../include/footer.html %>
+</body>
+</html>

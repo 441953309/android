@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <% include ../include/head.html %>
+</head>
+<body>
+<% include ../include/navbar.html %>
+<div id="main">
+  <% include ../include/sidebar.html %>
+  <div id="content">
+    <div class="panel">
+      <div class="header">
+        <ul class="breadcrumb">
+          <li><a href="/console">主页</a><span class="divider">/</span></li>
+          <li>历史统计<span class="divider">/</span></li>
+          <li class="active">小时统计(展示)</li>
+
+          <% var base_url = page.base + (page.base.indexOf('?') < 0 ? '?' : '&') + 'date='; %>
+          <li class="dropdown pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><%= time %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% for(var i=0; i<24; i++){ %>
+              <li role="presentation">
+                <%
+                var tStr = (i<10?('0'+i):i) + ':00';
+                %>
+                <a role="menuitem" href="<%= base_url+date+' '+tStr %>"><%= tStr %></a>
+              </li>
+              <% } %>
+            </ul>
+          </li>
+          <li class="dropdown pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><%= date %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% for(var i=0, now = new Date(); i<20; i++){ %>
+              <li role="presentation">
+                <%
+                var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+                var yNo = d.getFullYear();
+                var mNo = d.getMonth()+1;
+                var dNo = d.getDate();
+                var dStr = yNo + '-' + (mNo<10?('0'+mNo):mNo) + '-' + (dNo<10?('0'+dNo):dNo);
+                %>
+                <a role="menuitem" href="<%= base_url+dStr+' '+time %>"><%= dStr %></a>
+              </li>
+              <% } %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="inner">
+        <table class="table table-bordered">
+          <tr>
+            <th>渠道</th>
+            <th>展示次数</th>
+            <th>展示IP数</th>
+            <th>isShow</th>
+            <th>isAuto</th>
+            <th>disable</th>
+          </tr>
+          <% for(var i = 0; i < items.length; i++){ %>
+          <tr>
+            <td><span><%= items[i].group_id.name %></span></td>
+            <td><span><%= items[i].show_count %></span></td>
+            <td><span><%= items[i].show_ip_count %></span></td>
+            <td><span><%= items[i].group_id.isS %></span></td>
+            <td><span><%= items[i].group_id.isA %></span></td>
+            <td><span><%= items[i].group_id.disable %></span></td>
+          </tr>
+          <% } %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../include/footer.html %>
+</body>
+</html>

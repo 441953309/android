@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <% include ../include/head.html %>
+</head>
+<body>
+<% include ../include/navbar.html %>
+<div id="main">
+  <% include ../include/sidebar.html %>
+  <div id="content">
+    <div class="panel">
+      <div class="header">
+        <ul class="breadcrumb">
+          <li><a href="/console">主页</a><span class="divider">/</span></li>
+          <li>历史统计<span class="divider">/</span></li>
+          <li class="active">按天统计(点击)</li>
+
+          <% var base_url = page.base + (page.base.indexOf('?') < 0 ? '?' : '&') + 'date='; %>
+          <div class="dropdown pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><%= date %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% for(var i=0, now = new Date(); i<20; i++){ %>
+              <li role="presentation">
+                <%
+                var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+                var yNo = d.getFullYear();
+                var mNo = d.getMonth()+1;
+                var dNo = d.getDate();
+                var dStr = yNo + '-' + (mNo<10?('0'+mNo):mNo) + '-' + (dNo<10?('0'+dNo):dNo);
+                %>
+                <a role="menuitem" href="<%= base_url+dStr %>"><%= dStr %></a>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </ul>
+      </div>
+      <div class="inner">
+        <table class="table table-bordered">
+          <tr>
+            <th>渠道</th>
+            <th>自动点击次数</th>
+            <th>自动点击IP数</th>
+            <th>用户点击次数</th>
+            <th>用户点击IP数</th>
+          </tr>
+          <% for(var i = 0; i < items.length; i++){ %>
+          <tr>
+            <td><span><%= items[i]._id.group_id.name %></span></td>
+            <td><span><%= items[i].auto_click_count %></span></td>
+            <td><span><%= items[i].auto_click_ip_count %></span></td>
+            <td><span><%= items[i].user_click_count %></span></td>
+            <td><span><%= items[i].user_click_ip_count %></span></td>
+          </tr>
+          <% } %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../include/footer.html %>
+</body>
+</html>

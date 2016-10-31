@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <% include ../include/head.html %>
+</head>
+<body>
+<% include ../include/navbar.html %>
+<div id="main">
+  <% include ../include/sidebar.html %>
+  <div id="content">
+    <div class="panel">
+      <div class="header">
+        <ul class="breadcrumb">
+          <li><a href="/console">主页</a><span class="divider">/</span></li>
+          <li>实时统计<span class="divider">/</span></li>
+          <li class="active">展示统计</li>
+
+          <li class="dropdown pull-right">
+            <span><%= date + ' ' + time %> </span>
+          </li>
+        </ul>
+      </div>
+      <div class="inner">
+        <table class="table table-bordered">
+          <tr>
+            <th>渠道</th>
+            <th>展示次数</th>
+            <th>展示IP数</th>
+            <th>isShow</th>
+            <th>isAuto</th>
+            <th>disable</th>
+          </tr>
+          <% for(var i = 0; i < items.length; i++){ %>
+          <tr>
+            <td><span><%= items[i].group_name %></span></td>
+            <td><span><%= items[i].show_count %></span></td>
+            <td><span><%= items[i].show_ip_count %></span></td>
+            <td><span><%= items[i].group_isS %></span></td>
+            <td><span><%= items[i].group_isA %></span></td>
+            <td><span><%= items[i].group_disable %></span></td>
+          </tr>
+          <% } %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../include/footer.html %>
+</body>
+</html>

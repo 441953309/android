@@ -1,0 +1,14 @@
+[
+  {
+    "name": "console",
+    "script": "bin/run",
+    "error_file": "log/console-err.log",
+    "out_file": "log/console-out.log",
+    "pid_file": "log/console.pid",
+    "one_launch_only": "true",
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": "7001"
+    }
+  }
+]

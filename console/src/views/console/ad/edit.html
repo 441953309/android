@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <% include ../include/head.html %>
+</head>
+<body>
+<% include ../include/navbar.html %>
+<div id="main">
+  <% include ../include/sidebar.html %>
+  <div id="content">
+    <div class="panel">
+      <div class="header">
+        <ul class="breadcrumb">
+          <li><a href="/console">主页</a><span class="divider">/</span></li>
+          <li class="active">广告配置</li>
+        </ul>
+      </div>
+      <div class="inner">
+        <% if(typeof(error) !== 'undefined' && error){ %>
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert" href="#">&times;</a>
+          <strong><%= error %></strong>
+        </div>
+        <% } %>
+
+        <% if(typeof(action) !== 'undefined' && action === 'edit') { %>
+        <form class="form-horizontal" action="/console/ad/edit/<%= ad._id %>" method="post">
+        <% } else {%>
+        <form class="form-horizontal" action="/console/ad/create" method="post">
+        <% } %>
+          <div class="control-group">
+            <label class="control-label" for="name">name</label>
+            <div class="controls">
+              <input class="input-xlarge" id="name" name="name" size="30" type="text"
+                     value="<%= typeof(ad) !== 'undefined' && ad.name || '' %>"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="des">des</label>
+
+            <div class="controls">
+              <input class="input-xlarge" id="des" name="des" size="30" type="text"
+                     value="<%= typeof(ad) !== 'undefined' && ad.des || '' %>"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="imgName">imgName</label>
+
+            <div class="controls">
+              <input class="input-xlarge" id="imgName" name="imgName" size="30" type="text"
+                     value="<%= typeof(ad) !== 'undefined' && ad.imgName || '' %>"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="url">url</label>
+            <div class="controls">
+              <input class="input-xlarge" id="url" name="url" size="30" type="url"
+                     value="<%= typeof(ad) !== 'undefined' && ad.url || '' %>"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="weight">weight</label>
+            <div class="controls">
+              <input class="input-xlarge" id="weight" name="weight" size="30" type="number"
+                     value="<%= typeof(ad) !== 'undefined' && ad.weight || '' %>"/>
+            </div>
+          </div>
+
+          <% if(typeof(urlList) !== 'undefined') { %>
+          <div class="control-group">
+            <label class="control-label" >urls</label>
+
+            <div class="controls">
+              <table class="table table-bordered">
+                <tr>
+                  <th width="70">name</th>
+                  <th width="70">des</th>
+                  <th width="45">weight</th>
+                  <th width="10">D</th>
+                  <th>url</th>
+                  <th width="100">
+                    <a class="btn-link" href="/console/url/create/<%= ad._id %>"><span>添加</span></a>
+                  </th>
+                </tr>
+                <% for(var i = 0; i < urlList.length; i++){ %>
+                <tr>
+                  <td><span><%= urlList[i].name %></span></td>
+                  <td><span><%= urlList[i].des %></span></td>
+                  <td><span><%= urlList[i].weight %></span></td>
+                  <% if(!urlList[i].disable){ %> <td><span>F</span></td> <% } else { %> <td><span style="color:red;">T</span></td> <% } %>
+                  <td><span><%= urlList[i].url %></span></td>
+                  <td>
+                    <a class="btn-link" href="/console/url/edit/<%= urlList[i]._id %>">编辑</a>
+                  </td>
+                </tr>
+                <% } %>
+              </table>
+            </div>
+          </div>
+          <% } %>
+
+          <div class="control-group">
+            <label class="control-label" for="isS">isShow</label>
+            <div class="controls">
+              <label class="checkbox">
+                <% if(typeof(ad) !== 'undefined' && !ad.isS) { %>
+                <input id="isS" name="isS" type="checkbox"> 显示
+                <% } else {%>
+                <input id="isS" name="isS" type="checkbox" checked> 显示
+                <% } %>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="isA">isAuto</label>
+            <div class="controls">
+              <label class="checkbox">
+                <% if(typeof(ad) !== 'undefined' && !ad.isA) { %>
+                <input id="isA" name="isA" type="checkbox"> 自动
+                <% } else {%>
+                <input id="isA" name="isA" type="checkbox" checked> 自动
+                <% } %>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="isWX">isWX</label>
+            <div class="controls">
+              <label class="checkbox">
+                <% if(typeof(ad) !== 'undefined' && ad.isWX) { %>
+                <input id="isWX" name="isWX" type="checkbox" checked> 支持微信
+                <% } else {%>
+                <input id="isWX" name="isWX" type="checkbox"> 支持微信
+                <% } %>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="disable">disable</label>
+            <div class="controls">
+              <label class="checkbox">
+                <% if(typeof(ad) !== 'undefined' && ad.disable) { %>
+                <input id="disable" name="disable" type="checkbox" checked> 禁用
+                <% } else {%>
+                <input id="disable" name="disable" type="checkbox"> 禁用
+                <% } %>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="isAll">isAll</label>
+            <div class="controls">
+              <label class="checkbox">
+                <% if(typeof(ad) !== 'undefined' && ad.isAll) { %>
+                <input id="isAll" name="isAll" type="checkbox" checked> 全部渠道
+                <% } else {%>
+                <input id="isAll" name="isAll" type="checkbox"> 全部渠道
+                <% } %>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="groups" >groups</label>
+
+            <div class="controls">
+              <% for(var i = 0; i < groupList.length; i++) { %>
+              <label class="checkbox">
+                <% if(typeof(ad) !== 'undefined' && ad.groups.indexOf(groupList[i].id) > -1) { %>
+                <input type="checkbox" id="groups" name="groups" value="<%= groupList[i].id %>" checked>
+                <% } else {%>
+                <input type="checkbox" id="groups" name="groups" value="<%= groupList[i].id %>">
+                <% } %>
+                <%= groupList[i].name + ' - ' + groupList[i].des %>
+              </label>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <input type="submit" class="btn btn-success" value="提交"/>
+            <input type="reset" class="btn" value="重置"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../include/footer.html %>
+</body>
+</html>

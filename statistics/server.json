@@ -1,0 +1,14 @@
+[
+  {
+    "name": "statistics",
+    "script": "src/schedule.js",
+    "error_file": "log/statistics-err.log",
+    "out_file": "log/statistics-out.log",
+    "pid_file": "log/statistics.pid",
+    "one_launch_only": "true",
+    "exec_interpreter": "babel-node",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+]

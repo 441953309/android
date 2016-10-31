@@ -1,0 +1,22 @@
+{
+  "name": "dmp",
+  "version": "1.0.0",
+  "scripts": {
+    "pm2": "pm2 start server.json"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "koa": "^2.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "0.0.16",
+    "koa-mount": "^2.0.0",
+    "koa-router": "^7.0.1",
+    "koa-useragent": "^0.1.4",
+    "moment": "^2.14.1",
+    "mongoose": "^4.5.10",
+    "mongoose-timestamp": "^0.6.0",
+    "redis": "^2.6.2",
+    "runkoa": "^1.5.2",
+    "uglify-js": "^2.7.3"
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "name": "dmp",
+    "script": "bin/run",
+    "error_file": "log/dmp-err.log",
+    "out_file": "log/dmp-out.log",
+    "pid_file": "log/dmp.pid",
+    "one_launch_only": "true",
+    "instances": 16,
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": "80"
+    }
+  }
+]

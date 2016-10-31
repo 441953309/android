@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <% include ../include/head.html %>
+</head>
+<body>
+<% include ../include/navbar.html %>
+<div id="main">
+  <% include ../include/sidebar.html %>
+  <div id="content">
+    <div class="panel">
+      <div class="header">
+        <ul class="breadcrumb">
+          <li><a href="/console">主页</a><span class="divider">/</span></li>
+          <li class="active">Url配置</li>
+        </ul>
+      </div>
+      <div class="inner">
+        <% if(typeof(error) !== 'undefined' && error){ %>
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert" href="#">&times;</a>
+          <strong><%= error %></strong>
+        </div>
+        <% } %>
+
+        <% if(typeof(action) !== 'undefined' && action === 'edit') { %>
+        <form class="form-horizontal" action="/console/url/edit/<%= url._id %>" method="post">
+        <% } else {%>
+        <form class="form-horizontal" action="/console/url/create/<%= adId %>" method="post">
+        <% } %>
+          <div class="control-group">
+            <label class="control-label" for="name">name</label>
+            <div class="controls">
+              <input class="input-xlarge" id="name" name="name" size="30" type="text"
+                     value="<%= typeof(url) !== 'undefined' && url.name || '' %>"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="des">des</label>
+
+            <div class="controls">
+              <input class="input-xlarge" id="des" name="des" size="30" type="text"
+                     value="<%= typeof(url) !== 'undefined' && url.des || '' %>"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="url">url</label>
+            <div class="controls">
+              <input class="input-xlarge" id="url" name="url" size="30" type="url"
+                     value="<%= typeof(url) !== 'undefined' && url.url || '' %>"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="weight">weight</label>
+            <div class="controls">
+              <input class="input-xlarge" id="weight" name="weight" size="30" type="number"
+                     value="<%= typeof(url) !== 'undefined' && url.weight || '' %>"/>
+            </div>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label" for="disable">disable</label>
+            <div class="controls">
+              <label class="checkbox">
+                <% if(typeof(url) !== 'undefined' && url.disable) { %>
+                <input id="disable" name="disable" type="checkbox" checked> 禁用
+                <% } else {%>
+                <input id="disable" name="disable" type="checkbox"> 禁用
+                <% } %>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <input type="submit" class="btn btn-success" value="提交"/>
+            <input type="reset" class="btn" value="重置"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../include/footer.html %>
+</body>
+</html>
